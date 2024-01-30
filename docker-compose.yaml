@@ -8,8 +8,8 @@ services:
     volumes:
       - /data/.cache/huggingface:/root/.cache/huggingface
     ports:
-      - "8000:8000"
-    command: --model deepseek-ai/deepseek-coder-6.7b-instruct --enforce-eager  --dtype half
+      - "6602:8000"
+    command: --model deepseek-ai/deepseek-coder-6.7b-instruct --enforce-eager  --dtype half --max-model-len 16384
     deploy:
       resources:
         reservations:
