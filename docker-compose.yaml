@@ -9,7 +9,7 @@ services:
       - /data/.cache/huggingface:/root/.cache/huggingface
     ports:
       - "8000:8000"
-    command: --model deepseek-ai/deepseek-coder-6.7b-base --dtype half --enforce-eager
+    command: --model deepseek-ai/deepseek-coder-6.7b-instruct --enforce-eager  --dtype half
     deploy:
       resources:
         reservations:
@@ -17,4 +17,4 @@ services:
             - driver: nvidia
               #count: all
               capabilities: [ gpu ]
-              device_ids: [ "0", "1", "2", "3" ] # only use 1st gpu
+              device_ids: [ "1" ] #, "2", "3" ] # only use 1st gpu
