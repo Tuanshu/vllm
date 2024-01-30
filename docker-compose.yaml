@@ -1,0 +1,20 @@
+version: '3.8'
+services:
+  vllm:
+    image: vllm/vllm-openai:latest
+    runtime: nvidia
+    environment:
+      - HUGGING_FACE_HUB_TOKEN=<secret>
+    volumes:
+      - /data/.cache/huggingface:/root/.cache/huggingface
+    ports:
+      - "8000:8000"
+    command: --model deepseek-ai/deepseek-coder-6.7b-base --dtype half --enforce-eager
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              #count: all
+              capabilities: [ gpu ]
+              device_ids: [ "0", "1", "2", "3" ] # only use 1st gpu
